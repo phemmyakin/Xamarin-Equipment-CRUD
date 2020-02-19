@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodel="clr-namespace:EminentTest.ViewModels"
+             xmlns:local="clr-namespace:EminentTest.Helpers"
+             mc:Ignorable="d"
+             x:Class="EminentTest.Views.EquipmentDetailsPage">
+    <!--<ContentPage.BindingContext>
+        <viewmodel:EditEquipmentViewModel/>
+    </ContentPage.BindingContext>-->
+
+    
+        <StackLayout Padding="20">
+
+        <Entry Text="{Binding Equipment.Name}"/>
+
+            
+            
+            
+        <Picker x:Name="MyType" 
+        Title="Select Equipment type"
+        ItemsSource="{Binding Types}"
+        SelectedItem="{Binding Equipment.TypeName}"/>
+
+        <Picker  
+        Title="Select Equipment type"
+        ItemsSource="{Binding Statues}"
+        SelectedItem="{Binding Equipment.StatusName}"/>
+
+        <Entry Text="{Binding Equipment.Quantity}" Placeholder="Quantity" Keyboard="Numeric">
+            <Entry.Behaviors>
+                <local:NumericValidationBehaviour/>
+            </Entry.Behaviors>
+        </Entry>
+
+        <Button  Text="Edit" Command="{Binding EditEquipment}"/>
+        <Button  Text="Delete" Command="{Binding DeleteCommand}"/>
+
+    </StackLayout>
+</ContentPage>

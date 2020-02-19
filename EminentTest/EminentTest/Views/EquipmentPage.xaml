@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:equipment="clr-namespace:EminentTest.ViewModels"
+             xmlns:search="clr-namespace:EminentTest.Helpers"
+             mc:Ignorable="d"
+             Title=" All Equipments"
+             x:Class="EminentTest.Views.EquipmentPage">
+
+  
+    <ContentPage.BindingContext>
+        <equipment:EquipmentViewModel/>
+    </ContentPage.BindingContext>
+    
+        <StackLayout >
+        <StackLayout Padding="20">
+            <SearchBar Placeholder="Search Equipment" 
+                       x:Name="SearchBar"
+                       SearchCommand="{Binding SearchCommand}" 
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                <SearchBar.Behaviors>
+                    <search:TextChangedBehaviour/>
+                </SearchBar.Behaviors>
+            </SearchBar>
+           
+
+            <ListView
+                
+                    ItemsSource="{Binding equipmenT}"
+                    HasUnevenRows="True"
+                    ItemTapped="selectedequipment"
+                    IsPullToRefreshEnabled="true"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRefreshing}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView>
+                                    <StackLayout Padding="18">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}"
+                                               FontSize="20"
+                                               FontAttributes="Bold"/>
+                                        </StackLayout>
+
+                                    <Label Text="{Binding TypeName}" FontSize="15"/>
+                                    <Label Text="{Binding Quantity}" FontSize="14"/>
+                                </StackLayout>
+                                </ContentView>
+                            </ViewCell>
+
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+
+            <Button Text="Add Equipment" Clicked="AddEquipment"/>
+
+            </StackLayout>
+        </StackLayout>
+</ContentPage>

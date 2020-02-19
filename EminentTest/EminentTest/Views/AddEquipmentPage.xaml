@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:equipment="clr-namespace:EminentTest.ViewModels"
+             xmlns:local="clr-namespace:EminentTest.Helpers"
+             mc:Ignorable="d"
+             Title="Add Equipment"
+             x:Class="EminentTest.Views.AddEquipmentPage">
+    <ContentPage.BindingContext>
+        <equipment:EquipmentViewModel/>
+    </ContentPage.BindingContext>
+    
+        <StackLayout>
+        <Label Text=" Add new Equipment" />
+        <Entry Placeholder="Equipment Name" x:Name="EntryName" Text="{Binding Name}"/>
+
+           
+      
+
+        <Picker x:Name="MyStatus" 
+        Title="Select status type"
+        ItemsSource="{Binding Statues}"
+        SelectedItem="{Binding StatusName, Mode=TwoWay}"/>
+
+        <Picker x:Name="MyType" 
+        Title="Select Equipment type"
+        ItemsSource="{Binding Types}"
+                SelectedItem="{Binding TypeName, Mode=TwoWay}"/>
+
+        <Entry Text="{Binding Quantity}" Placeholder="Quantity" Keyboard="Numeric">
+            <Entry.Behaviors>
+                <local:NumericValidationBehaviour/>
+            </Entry.Behaviors>
+        </Entry> 
+               
+               
+               
+            <Button Text="Save" Command="{Binding CreateEquipment}"/>
+
+
+
+     
+
+    </StackLayout>
+  
+</ContentPage>
